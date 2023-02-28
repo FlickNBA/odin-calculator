@@ -18,26 +18,13 @@ body {
     width: 50%;
     background-color: bisque;
     border: 0.5rem solid slategray;
-}
-
-#result {
-    font-weight: 600;
-    font-size: 2.5rem;
-    text-align: right;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    background-color: linen;
-    border: 0.25rem solid lightsalmon;
-}
-
-#numbers {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
     gap: 1rem;
 }
 
-#numbers div {
+#calculator div {
     background-color: lightsalmon;
     border: 0.25rem solid salmon;
     aspect-ratio: 1 / 1;
@@ -49,7 +36,20 @@ body {
     cursor: pointer;
 }
 
-#numbers div:nth-child(4n), #numbers div:nth-last-child(2), #numbers div:nth-last-child(3) {
+div #clear, div #display {
+    font-weight: 600;
+    font-size: 2.5rem;
+    background-color: linen;
+    border: 0.25rem solid lightsalmon;
+}
+
+div #display {
+    cursor: auto;
+    grid-column: 2 / span 3;
+    aspect-ratio: auto;
+}
+
+#calculator div:nth-child(6), #calculator div:nth-child(10), #calculator div:nth-child(14), #calculator div:nth-last-child(3), #calculator div:nth-last-child(2), #calculator div:nth-last-child(1) {
     font-weight: 500;
     font-size: 2rem;
     background-color: salmon;

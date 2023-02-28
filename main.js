@@ -27,16 +27,28 @@ const operate = (a, operator, b) => {
   }
 };
 
-let displayValue;
+let displayValue = 0;
 
-let allButtons = document.querySelectorAll("#numbers div");
+const addToDisplay = (n) => {
+  if (displayValue == 0) {
+    displayValue = document.querySelector("#display").textContent = n;
+  } else {
+    displayValue = document.querySelector("#display").textContent += n;
+  }
+  document.querySelector("#display").textContent = displayValue;
+};
+
+let allButtons = document.querySelectorAll("#calculator div:not(#display)");
 
 let numberButtons = [...allButtons].filter((button) => {
-  if (button.innerHTML == "0") return true;
-  if (button.innerHTML == ".") return true;
-  if (Number(button.innerHTML)) return true;
+  if (button.innerText == "0") return true;
+  if (button.innerText == ".") return true;
+  if (Number(button.innerText)) return true;
 });
 
 numberButtons.forEach((button) => {
-  console.log(button.innerHTML);
+  console.log(button.innerText);
+  button.addEventListener("click", () => {
+    addToDisplay(button.innerText);
+  });
 });
