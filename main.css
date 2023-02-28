@@ -1,0 +1,57 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;600&display=swap");
+
+* {
+    font-family: "JetBrains Mono", monospace;
+}
+
+body {
+    background: honeydew;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#calculator {
+    padding: 2rem;
+    width: 50%;
+    background-color: bisque;
+    border: 0.5rem solid slategray;
+}
+
+#result {
+    font-weight: 600;
+    font-size: 2.5rem;
+    text-align: right;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: linen;
+    border: 0.25rem solid lightsalmon;
+}
+
+#numbers {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+#numbers div {
+    background-color: lightsalmon;
+    border: 0.25rem solid salmon;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 300;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+#numbers div:nth-child(4n), #numbers div:nth-last-child(2), #numbers div:nth-last-child(3) {
+    font-weight: 500;
+    font-size: 2rem;
+    background-color: salmon;
+    border: 0.25rem solid firebrick;
+}

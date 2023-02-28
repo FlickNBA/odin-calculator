@@ -27,6 +27,16 @@ const operate = (a, operator, b) => {
   }
 };
 
-console.log(operate(5, "-", 3));
-console.log(operate(9, "*", 3));
-console.log(operate(100, "/", 4));
+let displayValue;
+
+let allButtons = document.querySelectorAll("#numbers div");
+
+let numberButtons = [...allButtons].filter((button) => {
+  if (button.innerHTML == "0") return true;
+  if (button.innerHTML == ".") return true;
+  if (Number(button.innerHTML)) return true;
+});
+
+numberButtons.forEach((button) => {
+  console.log(button.innerHTML);
+});
