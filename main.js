@@ -14,7 +14,19 @@ const divide = (a, b) => {
   return a / b;
 };
 
-console.log(add(2, 5));
-console.log(subtract(7, 4));
-console.log(multiply(5, 4));
-console.log(divide(99, 4));
+const operate = (a, operator, b) => {
+  switch (operator) {
+    case "+":
+      return add(a, b);
+    case "-":
+      return subtract(a, b);
+    case "*":
+      return multiply(a, b);
+    case "/":
+      return divide(a, b);
+  }
+};
+
+console.log(operate(5, "-", 3));
+console.log(operate(9, "*", 3));
+console.log(operate(100, "/", 4));
