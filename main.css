@@ -13,6 +13,18 @@ body {
     height: 100vh;
 }
 
+#delete {
+    background-color: salmon;
+    border: 0.5rem solid firebrick;
+    font-weight: 600;
+    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    cursor: pointer;
+}
+
 #calculator {
     padding: 2rem;
     width: 50%;
