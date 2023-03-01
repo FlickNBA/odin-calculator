@@ -54,6 +54,7 @@ body {
     background-color: firebrick !important;
     border-color: maroon !important;
     opacity: 1 !important;
+    pointer-events: none !important;
 }
 
 #calculator div:hover {

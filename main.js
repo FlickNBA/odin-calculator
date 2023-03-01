@@ -31,6 +31,8 @@ let displayValue = 0;
 let currentA = false;
 let currentB = false;
 let currentOperator = false;
+let anyButtonActive = false;
+let functionalButtons;
 
 const startOperating = (a, operator) => {
   currentA = a;
@@ -44,12 +46,19 @@ const finishOperating = (b, operator = false, equalCalled = false) => {
   console.log(`Finishing math operation: ${currentA} ${currentOperator} ${currentB} = ${operate(currentA, currentOperator, currentB)}`);
   displayValue = operate(currentA, currentOperator, currentB);
   roundDisplay(displayValue);
-  currentA = displayValue;
-  currentB = false;
-  currentOperator = operator;
+  anyButtonActive = false;
 
   if (!equalCalled) {
+    console.log("!equal");
+    currentA = displayValue;
+    currentB = false;
     displayValue = ""; // Z TYM DZIAŁA CHAINING
+    currentOperator = operator;
+  } else {
+    console.log("equal!!!!!!!");
+    currentA = false;
+    currentB = false;
+    currentOperator = false;
   }
 
   //   if (!operator == "=") {
@@ -64,6 +73,7 @@ const removeActiveFromButtons = (a) => {
   a.forEach((button) => {
     button.classList.remove("active");
   });
+  anyButtonActive = false;
 };
 
 const initialSetup = () => {
@@ -79,7 +89,7 @@ const initialSetup = () => {
   });
   let allButtons = document.querySelectorAll("#calculator div:not(#display)");
 
-  let functionalButtons = [...allButtons].filter((button) => {
+  functionalButtons = [...allButtons].filter((button) => {
     if (button.innerText == "/") return true;
     if (button.innerText == "*") return true;
     if (button.innerText == "-") return true;
@@ -89,6 +99,7 @@ const initialSetup = () => {
   functionalButtons.forEach((button) => {
     button.addEventListener("click", () => {
       removeActiveFromButtons(functionalButtons);
+      anyButtonActive = true;
       button.classList.add("active");
       //DECIDE WHAT TO DO, START OR FINISH OPERATING
       // startOperating(displayValue, button.innerText);
@@ -119,8 +130,10 @@ const initialSetup = () => {
 
   dotButton.addEventListener("click", () => {
     console.log(". button clicked");
-    if (displayValue.indexOf(".") == -1) {
-      addToDisplay(".");
+    if (typeof displayValue != "number") {
+      if (displayValue.indexOf(".") == -1) {
+        addToDisplay(".");
+      }
     }
   });
 
@@ -135,6 +148,8 @@ const initialSetup = () => {
       addToDisplay(button.innerText);
     });
   });
+
+  let acButton = document.querySelector("#clear").addEventListener("click", () => resetButton());
 };
 
 initialSetup();
@@ -151,8 +166,18 @@ const addToDisplay = (n) => {
   }
 };
 
+const resetButton = () => {
+  currentA = false;
+  currentB = false;
+  currentOperator = false;
+  displayValue = 0;
+  removeActiveFromButtons(functionalButtons);
+  roundDisplay(displayValue);
+};
+
 const removeFromDisplay = () => {
   let newDisplay;
+  console.log(displayValue.length);
   if (displayValue.length > 1) {
     newDisplay = displayValue.substr(0, displayValue.length - 1);
   } else {
