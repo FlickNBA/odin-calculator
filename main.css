@@ -37,6 +37,8 @@ body {
 }
 
 #calculator div {
+    opacity: 0.75;
+    transition: all 500ms;
     background-color: lightsalmon;
     border: 0.25rem solid salmon;
     aspect-ratio: 1 / 1;
@@ -46,6 +48,16 @@ body {
     font-weight: 300;
     font-size: 1.5rem;
     cursor: pointer;
+}
+
+.active {
+    background-color: firebrick !important;
+    border-color: maroon !important;
+    opacity: 1 !important;
+}
+
+#calculator div:hover {
+    opacity: 1;
 }
 
 div #clear, div #display {

@@ -39,15 +39,31 @@ const startOperating = (a, operator) => {
   displayValue = "";
 };
 
-const finishOperating = (b, operator = false) => {
+const finishOperating = (b, operator = false, equalCalled = false) => {
   currentB = b;
   console.log(`Finishing math operation: ${currentA} ${currentOperator} ${currentB} = ${operate(currentA, currentOperator, currentB)}`);
   displayValue = operate(currentA, currentOperator, currentB);
-  document.querySelector("#display").textContent = displayValue;
+  roundDisplay(displayValue);
   currentA = displayValue;
   currentB = false;
   currentOperator = operator;
-  displayValue = ""; // TEST
+
+  if (!equalCalled) {
+    displayValue = ""; // Z TYM DZIAŁA CHAINING
+  }
+
+  //   if (!operator == "=") {
+  //     displayValue = "";
+  //     currentOperator = operator;
+  //   } else {
+  //     currentOperator = false;
+  //   }
+};
+
+const removeActiveFromButtons = (a) => {
+  a.forEach((button) => {
+    button.classList.remove("active");
+  });
 };
 
 const initialSetup = () => {
@@ -72,6 +88,8 @@ const initialSetup = () => {
 
   functionalButtons.forEach((button) => {
     button.addEventListener("click", () => {
+      removeActiveFromButtons(functionalButtons);
+      button.classList.add("active");
       //DECIDE WHAT TO DO, START OR FINISH OPERATING
       // startOperating(displayValue, button.innerText);
       console.log(`btn func clicked => ${button.innerText}`);
@@ -91,12 +109,23 @@ const initialSetup = () => {
   });
 
   equalsButton.addEventListener("click", () => {
-    finishOperating(displayValue);
+    finishOperating(displayValue, false, true);
+    removeActiveFromButtons(functionalButtons);
+  });
+
+  let dotButton = [...allButtons].find((button) => {
+    return button.innerText == ".";
+  });
+
+  dotButton.addEventListener("click", () => {
+    console.log(". button clicked");
+    if (displayValue.indexOf(".") == -1) {
+      addToDisplay(".");
+    }
   });
 
   let numberButtons = [...allButtons].filter((button) => {
     if (button.innerText == "0") return true;
-    if (button.innerText == ".") return true;
     if (Number(button.innerText)) return true;
   });
 
@@ -130,5 +159,10 @@ const removeFromDisplay = () => {
     newDisplay = 0;
   }
   displayValue = newDisplay;
-  document.querySelector("#display").textContent = displayValue;
+  roundDisplay(displayValue);
+};
+
+const roundDisplay = (n) => {
+  console.log("s");
+  document.querySelector("#display").textContent = Math.round(n * 1000) / 1000;
 };
